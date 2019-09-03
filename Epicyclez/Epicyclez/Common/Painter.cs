@@ -10,11 +10,11 @@ namespace Epicyclez.Common
 {
     public sealed class Painter
     {
-        public int Count { get; private set; }
+        public int Count => this.csX.Count == this.csY.Count ? this.csX.Count : 0;
         public int Skip {
             get => this.skip;
             set {
-                if (value > 0) {
+                if (value > 1) {
                     this.skip = value;
                     this.Resample();
                 }
@@ -22,8 +22,10 @@ namespace Epicyclez.Common
         }
 
         private bool isLoaded;
+        private bool isPainting;
         private int skip;
-        private float time = 0;
+        private float time;
+        private List<(double X, double Y)> data;
         private List<Epicycle> csX;
         private List<Epicycle> csY;
         private readonly List<PointF> path = new List<PointF>();
@@ -32,28 +34,39 @@ namespace Epicyclez.Common
         public Painter()
         {
             this.skip = 1;
+            this.time = 0;
         }
 
 
         public void TryLoadData(string path)
         {
-            var data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText("data.json")).ToList();
-            this.Count = data.Count;
-            this.csX = FFT.DFT(data.Select(p => p.First())).OrderByDescending(c => c.Amplitude).ToList();
-            this.csY = FFT.DFT(data.Select(p => p.Last())).OrderByDescending(c => c.Amplitude).ToList();
-            this.Resample();
+            this.data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText("data.json")).Select(p => (p.First(), p.Last())).ToList();
             this.isLoaded = true;
+            this.Resample();
         }
 
         public void Resample()
         {
-            if (!this.isLoaded || this.Skip < 2)
+            if (!this.isLoaded)
                 return;
 
-            for (int i = 0; i < this.Count / this.Skip; i++) {
-                this.csX.RemoveRange(i, this.Skip - 1);
-                this.csY.RemoveRange(i, this.Skip - 1);
+            if (this.Skip > 1) {
+                var csXnew = new List<double>();
+                var csYnew = new List<double>();
+                for (int i = 0; i < this.data.Count; i++) {
+                    if (i % this.Skip == 0) {
+                        csXnew.Add(this.data[i].X);
+                        csYnew.Add(this.data[i].Y);
+                    }
+                }
+                this.csX = FFT.DFT(csXnew).OrderByDescending(c => c.Amplitude).ToList();
+                this.csY = FFT.DFT(csYnew).OrderByDescending(c => c.Amplitude).ToList();
+            } else {
+                this.csX = FFT.DFT(this.data.Select(p => p.X)).OrderByDescending(c => c.Amplitude).ToList();
+                this.csY = FFT.DFT(this.data.Select(p => p.Y)).OrderByDescending(c => c.Amplitude).ToList();
             }
+
+            this.Reset();
         }
 
         public void Paint(Graphics g, int w, int h)
@@ -63,7 +76,7 @@ namespace Epicyclez.Common
 
             this.path.Insert(0, new PointF(vxX, vyY));
 
-            using (var p = new Pen(Color.Gray)) {
+            using (var p = new Pen(Color.White)) {
                 g.DrawLine(p, vxX, vxY, vxX, vyY);
                 g.DrawLine(p, vyX, vyY, vxX, vyY);
             }
@@ -75,17 +88,35 @@ namespace Epicyclez.Common
                 }
             }
 
-            this.time += (float)(2 * Math.PI / this.Count);
-            if (this.time > 2 * Math.PI) {
-                this.time = 0;
-                this.path.Clear();
+            if (this.isPainting) {
+                this.time += (float)(2 * Math.PI / this.Count);
+                if (this.time > 2 * Math.PI)
+                    this.Restart();
             }
+        }
+
+        public void Start()
+            => this.isPainting = true;
+
+        public void Stop()
+            => this.isPainting = false;
+
+        public void Reset()
+        {
+            this.Stop();
+            this.Restart();
+        }
+
+        public void Restart()
+        {
+            this.time = 0;
+            this.path.Clear();
         }
 
 
         private (float X, float Y) DrawEpicycles(Graphics g, float x, float y, double rotation, IReadOnlyList<Epicycle> cs)
         {
-            using (var p = new Pen(Color.Black)) {
+            using (var p = new Pen(Color.White)) {
                 foreach (Epicycle c in cs) {
                     float px = x, py = y;
                     g.TranslateTransform(-(float)c.Amplitude, -(float)c.Amplitude);
