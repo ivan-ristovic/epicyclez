@@ -40,7 +40,16 @@ namespace Epicyclez.Common
 
         public void TryLoadData(string path)
         {
-            this.data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText("data.json")).Select(p => (p.First(), p.Last())).ToList();
+            this.data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText(path)).Select(p => (p.First(), p.Last())).ToList();
+            this.skip = 8;
+            this.isLoaded = true;
+            this.Resample();
+        }
+
+        public void SetData(IEnumerable<(double, double)> data)
+        {
+            this.data = data.ToList();
+            this.skip = 0;
             this.isLoaded = true;
             this.Resample();
         }
@@ -71,7 +80,7 @@ namespace Epicyclez.Common
 
         public void Paint(Graphics g, int w, int h)
         {
-            (float vxX, float vxY) = this.DrawEpicycles(g, w / 2 + 100, 150, 0, this.csX);
+            (float vxX, float vxY) = this.DrawEpicycles(g, w / 2, 200, 0, this.csX);
             (float vyX, float vyY) = this.DrawEpicycles(g, 150, h / 2 + 100, Math.PI / 2, this.csY);
 
             this.path.Insert(0, new PointF(vxX, vyY));

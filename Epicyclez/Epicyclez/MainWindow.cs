@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Epicyclez.Common;
@@ -32,7 +33,6 @@ namespace Epicyclez
         {
             this.InitializeComponent();
 
-            this.p.Skip = 8;
             this.p.TryLoadData("data.json");
         }
 
@@ -47,7 +47,15 @@ namespace Epicyclez
 
         private void BtnStop_Click(object sender, EventArgs e) => this.p.Stop();
 
-        private void BtnDraw_Click(object sender, EventArgs e) => this.p.Reset();
+        private void BtnDraw_Click(object sender, EventArgs e)
+        {
+            this.p.Reset();
+            using (var form = new DrawingForm()) {
+                form.ShowDialog();
+                if (form.IsConfirmed)
+                    this.p.SetData(form.DrawPoints);
+            }
+        }
 
         private void BtnRestart_Click(object sender, EventArgs e) => this.p.Restart();
     }
