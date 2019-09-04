@@ -31,12 +31,14 @@
             this.tmrTick = new System.Windows.Forms.Timer(this.components);
             this.btnExit = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnDraw = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.btnMask = new System.Windows.Forms.Button();
+            this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // tmrTick
@@ -64,23 +66,23 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(342, 7);
+            this.lblTitle.Location = new System.Drawing.Point(508, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(75, 20);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Epicycles";
             this.lblTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Move_MouseDown);
             // 
-            // panel1
+            // pnlTop
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.btnExit);
-            this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Location = new System.Drawing.Point(0, -1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1100, 36);
-            this.panel1.TabIndex = 2;
-            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Move_MouseDown);
+            this.pnlTop.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnlTop.Controls.Add(this.btnExit);
+            this.pnlTop.Controls.Add(this.lblTitle);
+            this.pnlTop.Location = new System.Drawing.Point(0, -1);
+            this.pnlTop.Name = "pnlTop";
+            this.pnlTop.Size = new System.Drawing.Size(1100, 36);
+            this.pnlTop.TabIndex = 2;
+            this.pnlTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Move_MouseDown);
             // 
             // btnStart
             // 
@@ -90,6 +92,7 @@
             this.btnStart.TabIndex = 3;
             this.btnStart.Text = "▶️";
             this.btnStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ttHelp.SetToolTip(this.btnStart, "Start epicycles");
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
@@ -101,6 +104,7 @@
             this.btnDraw.TabIndex = 4;
             this.btnDraw.Text = "🖋️";
             this.btnDraw.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ttHelp.SetToolTip(this.btnDraw, "Draw custom shape");
             this.btnDraw.UseVisualStyleBackColor = true;
             this.btnDraw.Click += new System.EventHandler(this.BtnDraw_Click);
             // 
@@ -112,6 +116,7 @@
             this.btnStop.TabIndex = 5;
             this.btnStop.Text = "⬛";
             this.btnStop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ttHelp.SetToolTip(this.btnStop, "Pause epicycles");
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
@@ -123,8 +128,21 @@
             this.btnRestart.Size = new System.Drawing.Size(25, 25);
             this.btnRestart.TabIndex = 6;
             this.btnRestart.Text = "◀◀";
+            this.ttHelp.SetToolTip(this.btnRestart, "Restart epicycles");
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
+            // 
+            // btnMask
+            // 
+            this.btnMask.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMask.Location = new System.Drawing.Point(136, 41);
+            this.btnMask.Name = "btnMask";
+            this.btnMask.Size = new System.Drawing.Size(25, 25);
+            this.btnMask.TabIndex = 7;
+            this.btnMask.Text = "M";
+            this.ttHelp.SetToolTip(this.btnMask, "Toggle mask mode - Show/Hide the data that is being approximated");
+            this.btnMask.UseVisualStyleBackColor = true;
+            this.btnMask.Click += new System.EventHandler(this.BtnMask_Click);
             // 
             // MainWindow
             // 
@@ -132,18 +150,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1098, 768);
+            this.Controls.Add(this.btnMask);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnDraw);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlTop);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainWindow";
             this.Text = "Epicyclez";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainWindow_Paint);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlTop.ResumeLayout(false);
+            this.pnlTop.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -153,11 +172,13 @@
         private System.Windows.Forms.Timer tmrTick;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnDraw;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnRestart;
+        private System.Windows.Forms.Button btnMask;
+        private System.Windows.Forms.ToolTip ttHelp;
     }
 }
 

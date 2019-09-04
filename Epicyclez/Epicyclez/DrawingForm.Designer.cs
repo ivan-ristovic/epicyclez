@@ -53,7 +53,7 @@
             // tmrTick
             // 
             this.tmrTick.Enabled = true;
-            this.tmrTick.Interval = 20;
+            this.tmrTick.Interval = 10;
             this.tmrTick.Tick += new System.EventHandler(this.TmrTick_Tick);
             // 
             // btnCancel

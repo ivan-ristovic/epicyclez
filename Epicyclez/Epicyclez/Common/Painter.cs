@@ -20,6 +20,7 @@ namespace Epicyclez.Common
                 }
             }
         }
+        public bool MaskMode { get; set; }
 
         private bool isLoaded;
         private bool isPainting;
@@ -80,6 +81,13 @@ namespace Epicyclez.Common
 
         public void Paint(Graphics g, int w, int h)
         {
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+
+            float offx = w / 2;
+            float offy = h / 2 + 100;
+            if (this.MaskMode)
+                this.DrawData(g, offx, offy);
+
             (float vxX, float vxY) = this.DrawEpicycles(g, w / 2, 200, 0, this.csX);
             (float vyX, float vyY) = this.DrawEpicycles(g, 150, h / 2 + 100, Math.PI / 2, this.csY);
 
@@ -137,6 +145,12 @@ namespace Epicyclez.Common
                 }
             }
             return (x, y);
+        }
+
+        private void DrawData(Graphics g, float offx, float offy)
+        {
+            using (var pen = new Pen(Color.White))
+                g.DrawLines(pen, this.data.Select(p => new PointF((float)p.X + offx, (float)p.Y + offy)).ToArray());
         }
     }
 }

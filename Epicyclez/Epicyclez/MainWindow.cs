@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -58,5 +60,7 @@ namespace Epicyclez
         }
 
         private void BtnRestart_Click(object sender, EventArgs e) => this.p.Restart();
+
+        private void BtnMask_Click(object sender, EventArgs e) => this.p.MaskMode = !this.p.MaskMode;
     }
 }
