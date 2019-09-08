@@ -41,7 +41,12 @@ namespace Epicyclez
 
         private void MainWindow_Paint(object sender, PaintEventArgs e) => this.p.Paint(e.Graphics, this.Width, this.Height);
 
-        private void TmrTick_Tick(object sender, EventArgs e) => this.Invalidate();
+        private void TmrTick_Tick(object sender, EventArgs e)
+        {
+            this.Invalidate();
+            this.lblEpicycles.Text = $"Epicycles : {this.p.Count}";
+            this.lblTime.Text = $"Time      : {this.p.Time:n5}";
+        }
 
         private void BtnExit_Click(object sender, EventArgs e) => this.Close();
 

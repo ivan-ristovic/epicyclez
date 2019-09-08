@@ -12,10 +12,10 @@ namespace Epicyclez.Common
     {
         public int Count => this.csX.Count == this.csY.Count ? this.csX.Count : 0;
         public bool MaskMode { get; set; }
+        public float Time { get; private set; }
 
         private bool isLoaded;
         private bool isPainting;
-        private float time;
         private IReadOnlyList<(double X, double Y)> data;
         private IReadOnlyList<Epicycle> csX;
         private IReadOnlyList<Epicycle> csY;
@@ -68,14 +68,14 @@ namespace Epicyclez.Common
             if (this.path.Count > 1) {
                 using (var p = new Pen(Color.Red, 2)) {
                     var path = new GraphicsPath();
-                    path.AddLines(this.path.Select(t => new PointF(t.X, t.Y)).ToArray());
+                    path.AddCurve(this.path.Select(t => new PointF(t.X, t.Y)).ToArray());
                     g.DrawPath(p, path);
                 }
             }
 
             if (this.isPainting) {
-                this.time += (float)(2 * Math.PI / this.Count);
-                if (this.time > 2 * Math.PI)
+                this.Time += (float)(2 * Math.PI / this.Count);
+                if (this.Time > 2 * Math.PI)
                     this.Restart();
             }
         }
@@ -94,7 +94,7 @@ namespace Epicyclez.Common
 
         public void Restart()
         {
-            this.time = 0;
+            this.Time = 0;
             this.path.Clear();
         }
 
@@ -105,8 +105,8 @@ namespace Epicyclez.Common
                 foreach (Epicycle c in cs) {
                     float px = x, py = y;
                     g.TranslateTransform(-(float)c.Amplitude, -(float)c.Amplitude);
-                    x += (float)(c.Amplitude * Math.Cos(c.Frequency * this.time + c.Phase + rotation));
-                    y += (float)(c.Amplitude * Math.Sin(c.Frequency * this.time + c.Phase + rotation));
+                    x += (float)(c.Amplitude * Math.Cos(c.Frequency * this.Time + c.Phase + rotation));
+                    y += (float)(c.Amplitude * Math.Sin(c.Frequency * this.Time + c.Phase + rotation));
                     g.DrawEllipse(p, px, py, (float)c.Amplitude * 2, (float)c.Amplitude * 2);
                     g.TranslateTransform((float)c.Amplitude, (float)c.Amplitude);
                     g.DrawLine(p, px, py, x, y);

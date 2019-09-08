@@ -38,6 +38,8 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnMask = new System.Windows.Forms.Button();
             this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
+            this.lblEpicycles = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -144,12 +146,38 @@
             this.btnMask.UseVisualStyleBackColor = true;
             this.btnMask.Click += new System.EventHandler(this.BtnMask_Click);
             // 
+            // lblEpicycles
+            // 
+            this.lblEpicycles.BackColor = System.Drawing.Color.Transparent;
+            this.lblEpicycles.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEpicycles.ForeColor = System.Drawing.Color.White;
+            this.lblEpicycles.Location = new System.Drawing.Point(9, 87);
+            this.lblEpicycles.Name = "lblEpicycles";
+            this.lblEpicycles.Size = new System.Drawing.Size(152, 23);
+            this.lblEpicycles.TabIndex = 8;
+            this.lblEpicycles.Text = "Epicycles : 0";
+            this.lblEpicycles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTime
+            // 
+            this.lblTime.BackColor = System.Drawing.Color.Transparent;
+            this.lblTime.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.White;
+            this.lblTime.Location = new System.Drawing.Point(9, 69);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(152, 23);
+            this.lblTime.TabIndex = 9;
+            this.lblTime.Text = "Time      : 0";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1098, 768);
+            this.Controls.Add(this.lblTime);
+            this.Controls.Add(this.lblEpicycles);
             this.Controls.Add(this.btnMask);
             this.Controls.Add(this.btnRestart);
             this.Controls.Add(this.btnStop);
@@ -179,6 +207,8 @@
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Button btnMask;
         private System.Windows.Forms.ToolTip ttHelp;
+        private System.Windows.Forms.Label lblEpicycles;
+        private System.Windows.Forms.Label lblTime;
     }
 }
 

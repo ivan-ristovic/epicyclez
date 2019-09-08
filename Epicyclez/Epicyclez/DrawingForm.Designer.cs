@@ -47,7 +47,7 @@
             // 
             // tmrDraw
             // 
-            this.tmrDraw.Interval = 20;
+            this.tmrDraw.Interval = 10;
             this.tmrDraw.Tick += new System.EventHandler(this.TmrDraw_Tick);
             // 
             // tmrTick
