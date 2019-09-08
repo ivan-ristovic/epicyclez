@@ -11,38 +11,20 @@ namespace Epicyclez.Common
     public sealed class Painter
     {
         public int Count => this.csX.Count == this.csY.Count ? this.csX.Count : 0;
-        public int Skip {
-            get => this.skip;
-            set {
-                if (value > 1) {
-                    this.skip = value;
-                    this.Resample();
-                }
-            }
-        }
         public bool MaskMode { get; set; }
 
         private bool isLoaded;
         private bool isPainting;
-        private int skip;
         private float time;
-        private List<(double X, double Y)> data;
-        private List<Epicycle> csX;
-        private List<Epicycle> csY;
+        private IReadOnlyList<(double X, double Y)> data;
+        private IReadOnlyList<Epicycle> csX;
+        private IReadOnlyList<Epicycle> csY;
         private readonly List<PointF> path = new List<PointF>();
-
-
-        public Painter()
-        {
-            this.skip = 1;
-            this.time = 0;
-        }
-
+        
 
         public void TryLoadData(string path)
         {
             this.data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText(path)).Select(p => (p.First(), p.Last())).ToList();
-            this.skip = 8;
             this.isLoaded = true;
             this.Resample();
         }
@@ -50,7 +32,6 @@ namespace Epicyclez.Common
         public void SetData(IEnumerable<(double, double)> data)
         {
             this.data = data.ToList();
-            this.skip = 0;
             this.isLoaded = true;
             this.Resample();
         }
@@ -60,21 +41,8 @@ namespace Epicyclez.Common
             if (!this.isLoaded)
                 return;
 
-            if (this.Skip > 1) {
-                var csXnew = new List<double>();
-                var csYnew = new List<double>();
-                for (int i = 0; i < this.data.Count; i++) {
-                    if (i % this.Skip == 0) {
-                        csXnew.Add(this.data[i].X);
-                        csYnew.Add(this.data[i].Y);
-                    }
-                }
-                this.csX = FFT.DFT(csXnew).OrderByDescending(c => c.Amplitude).ToList();
-                this.csY = FFT.DFT(csYnew).OrderByDescending(c => c.Amplitude).ToList();
-            } else {
-                this.csX = FFT.DFT(this.data.Select(p => p.X)).OrderByDescending(c => c.Amplitude).ToList();
-                this.csY = FFT.DFT(this.data.Select(p => p.Y)).OrderByDescending(c => c.Amplitude).ToList();
-            }
+            this.csX = FFT.DFT(this.data.Select(p => p.X));
+            this.csY = FFT.DFT(this.data.Select(p => p.Y));
 
             this.Reset();
         }
