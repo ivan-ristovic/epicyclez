@@ -16,7 +16,7 @@ namespace Epicyclez.Common
 
         private bool isLoaded;
         private bool isPainting;
-        private IReadOnlyList<(double X, double Y)> data;
+        private IReadOnlyList<PointF> data;
         private IReadOnlyList<Epicycle> csX;
         private IReadOnlyList<Epicycle> csY;
         private readonly List<PointF> path = new List<PointF>();
@@ -24,14 +24,17 @@ namespace Epicyclez.Common
 
         public void TryLoadData(string path)
         {
-            this.data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText(path)).Select(p => (p.First(), p.Last())).ToList();
+            this.data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText(path))
+                .Select(p => new PointF((float)p.First(), (float)p.Last()))
+                .ToList()
+                .AsReadOnly();
             this.isLoaded = true;
             this.Resample();
         }
 
-        public void SetData(IEnumerable<(double, double)> data)
+        public void SetData(IEnumerable<PointF> data)
         {
-            this.data = data.ToList();
+            this.data = data.ToList().AsReadOnly();
             this.isLoaded = true;
             this.Resample();
         }

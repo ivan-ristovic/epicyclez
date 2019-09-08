@@ -7,7 +7,7 @@ namespace Epicyclez.Common
 {
     public static class FFT
     {
-        public static IReadOnlyList<Epicycle> DFT(IEnumerable<double> values, int? count = null)
+        public static IReadOnlyList<Epicycle> DFT(IEnumerable<float> values, int? count = null)
         {
             var ys = values.ToList();
             if (count is null || count < 1)

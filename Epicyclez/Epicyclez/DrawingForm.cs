@@ -12,7 +12,7 @@ namespace Epicyclez
     public partial class DrawingForm : Form
     {
         public bool IsConfirmed { get; private set; }
-        public IReadOnlyList<(double, double)> DrawPoints => this.drawPoints.Select(p => ((double)(p.X - 100), (double)(p.Y - 150))).ToList().AsReadOnly();
+        public IReadOnlyList<PointF> DrawPoints => this.drawPoints.Select(p => new PointF(p.X - 100, p.Y - 150)).ToList().AsReadOnly();
 
         private List<CursorLocationPoint> drawPoints = new List<CursorLocationPoint>();
 
