@@ -42,7 +42,6 @@ namespace Epicyclez
             CursorLocationPoint p = this.GetCursorPosition();
             if (InBounds(p))
                 this.drawPoints.Add(p);
-            Console.WriteLine(this.drawPoints.Last());
 
             bool InBounds(CursorLocationPoint cl)
                 => cl.X >= 0 && cl.X <= this.Width && cl.Y >= 0 && cl.Y <= this.Height;

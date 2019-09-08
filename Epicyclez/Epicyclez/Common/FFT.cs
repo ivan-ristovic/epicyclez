@@ -7,12 +7,14 @@ namespace Epicyclez.Common
 {
     public static class FFT
     {
-        public static IReadOnlyList<Epicycle> DFT(IEnumerable<double> values)
+        public static IReadOnlyList<Epicycle> DFT(IEnumerable<double> values, int? count = null)
         {
             var ys = values.ToList();
-            var dft = new List<Epicycle>(ys.Count);
+            if (count is null || count < 1)
+                count = ys.Count;
+            var dft = new List<Epicycle>(count.Value);
 
-            for (int i = 0; i < ys.Count; i++) {
+            for (int i = 0; i < count; i++) {
                 double re = 0, im = 0;
 
                 for (int n = 0; n < ys.Count; n++) {
@@ -24,7 +26,7 @@ namespace Epicyclez.Common
                 dft.Add(new Epicycle(i, new Complex(re / ys.Count, im / ys.Count)));
             }
 
-            return dft.ToList().AsReadOnly();
+            return dft.OrderByDescending(c => c.Amplitude).ToList().AsReadOnly();
         }
     }
 }
