@@ -42,8 +42,12 @@
             this.lblTime = new System.Windows.Forms.Label();
             this.lblSpeed = new System.Windows.Forms.Label();
             this.trbInterval = new System.Windows.Forms.TrackBar();
+            this.trbPrecision = new System.Windows.Forms.TrackBar();
+            this.lblPrecisionTrb = new System.Windows.Forms.Label();
+            this.lblSpeedTrb = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbPrecision)).BeginInit();
             this.SuspendLayout();
             // 
             // tmrTick
@@ -189,10 +193,11 @@
             // trbInterval
             // 
             this.trbInterval.LargeChange = 40;
-            this.trbInterval.Location = new System.Drawing.Point(0, 133);
+            this.trbInterval.Location = new System.Drawing.Point(325, 41);
             this.trbInterval.Maximum = 80;
             this.trbInterval.Minimum = 10;
             this.trbInterval.Name = "trbInterval";
+            this.trbInterval.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.trbInterval.Size = new System.Drawing.Size(161, 45);
             this.trbInterval.SmallChange = 5;
             this.trbInterval.TabIndex = 11;
@@ -200,12 +205,55 @@
             this.trbInterval.Value = 15;
             this.trbInterval.ValueChanged += new System.EventHandler(this.TrbInterval_ValueChanged);
             // 
+            // trbPrecision
+            // 
+            this.trbPrecision.LargeChange = 20;
+            this.trbPrecision.Location = new System.Drawing.Point(167, 41);
+            this.trbPrecision.Maximum = 100;
+            this.trbPrecision.Minimum = 10;
+            this.trbPrecision.Name = "trbPrecision";
+            this.trbPrecision.Size = new System.Drawing.Size(152, 45);
+            this.trbPrecision.SmallChange = 5;
+            this.trbPrecision.TabIndex = 12;
+            this.ttHelp.SetToolTip(this.trbPrecision, "Control epicycle amount");
+            this.trbPrecision.Value = 100;
+            this.trbPrecision.ValueChanged += new System.EventHandler(this.TrbPrecision_ValueChanged);
+            // 
+            // lblPrecisionTrb
+            // 
+            this.lblPrecisionTrb.AutoSize = true;
+            this.lblPrecisionTrb.BackColor = System.Drawing.Color.Transparent;
+            this.lblPrecisionTrb.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecisionTrb.ForeColor = System.Drawing.Color.White;
+            this.lblPrecisionTrb.Location = new System.Drawing.Point(213, 73);
+            this.lblPrecisionTrb.Name = "lblPrecisionTrb";
+            this.lblPrecisionTrb.Size = new System.Drawing.Size(61, 13);
+            this.lblPrecisionTrb.TabIndex = 13;
+            this.lblPrecisionTrb.Text = "Precision";
+            this.lblPrecisionTrb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblSpeedTrb
+            // 
+            this.lblSpeedTrb.AutoSize = true;
+            this.lblSpeedTrb.BackColor = System.Drawing.Color.Transparent;
+            this.lblSpeedTrb.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSpeedTrb.ForeColor = System.Drawing.Color.White;
+            this.lblSpeedTrb.Location = new System.Drawing.Point(388, 73);
+            this.lblSpeedTrb.Name = "lblSpeedTrb";
+            this.lblSpeedTrb.Size = new System.Drawing.Size(37, 13);
+            this.lblSpeedTrb.TabIndex = 14;
+            this.lblSpeedTrb.Text = "Speed";
+            this.lblSpeedTrb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1098, 768);
+            this.Controls.Add(this.lblSpeedTrb);
+            this.Controls.Add(this.lblPrecisionTrb);
+            this.Controls.Add(this.trbPrecision);
             this.Controls.Add(this.trbInterval);
             this.Controls.Add(this.lblSpeed);
             this.Controls.Add(this.lblTime);
@@ -224,6 +272,7 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trbInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbPrecision)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,6 +294,9 @@
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblSpeed;
         private System.Windows.Forms.TrackBar trbInterval;
+        private System.Windows.Forms.TrackBar trbPrecision;
+        private System.Windows.Forms.Label lblPrecisionTrb;
+        private System.Windows.Forms.Label lblSpeedTrb;
     }
 }
 

@@ -74,5 +74,11 @@ namespace Epicyclez
             this.tmrTick.Interval = value;
             this.lblSpeed.Text = $"Speed     : {1000 / value}";
         }
+
+        private void TrbPrecision_ValueChanged(object sender, EventArgs e)
+        {
+            // TODO
+            throw new NotImplementedException();
+        }
     }
 }
