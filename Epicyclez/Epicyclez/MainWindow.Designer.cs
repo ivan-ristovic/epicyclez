@@ -40,7 +40,10 @@
             this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
             this.lblEpicycles = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
+            this.lblSpeed = new System.Windows.Forms.Label();
+            this.trbInterval = new System.Windows.Forms.TrackBar();
             this.pnlTop.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trbInterval)).BeginInit();
             this.SuspendLayout();
             // 
             // tmrTick
@@ -94,7 +97,7 @@
             this.btnStart.TabIndex = 3;
             this.btnStart.Text = "▶️";
             this.btnStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ttHelp.SetToolTip(this.btnStart, "Start epicycles");
+            this.ttHelp.SetToolTip(this.btnStart, "Start animation");
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.BtnStart_Click);
             // 
@@ -118,7 +121,7 @@
             this.btnStop.TabIndex = 5;
             this.btnStop.Text = "⬛";
             this.btnStop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ttHelp.SetToolTip(this.btnStop, "Pause epicycles");
+            this.ttHelp.SetToolTip(this.btnStop, "Pause animation");
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
@@ -130,7 +133,7 @@
             this.btnRestart.Size = new System.Drawing.Size(25, 25);
             this.btnRestart.TabIndex = 6;
             this.btnRestart.Text = "◀◀";
-            this.ttHelp.SetToolTip(this.btnRestart, "Restart epicycles");
+            this.ttHelp.SetToolTip(this.btnRestart, "Restart animation");
             this.btnRestart.UseVisualStyleBackColor = true;
             this.btnRestart.Click += new System.EventHandler(this.BtnRestart_Click);
             // 
@@ -170,12 +173,41 @@
             this.lblTime.Text = "Time      : 0";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // lblSpeed
+            // 
+            this.lblSpeed.BackColor = System.Drawing.Color.Transparent;
+            this.lblSpeed.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSpeed.ForeColor = System.Drawing.Color.White;
+            this.lblSpeed.Location = new System.Drawing.Point(9, 106);
+            this.lblSpeed.Name = "lblSpeed";
+            this.lblSpeed.Size = new System.Drawing.Size(152, 23);
+            this.lblSpeed.TabIndex = 10;
+            this.lblSpeed.Text = "Speed     : 67";
+            this.lblSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ttHelp.SetToolTip(this.lblSpeed, "How many points are drawn each second");
+            // 
+            // trbInterval
+            // 
+            this.trbInterval.LargeChange = 40;
+            this.trbInterval.Location = new System.Drawing.Point(0, 133);
+            this.trbInterval.Maximum = 80;
+            this.trbInterval.Minimum = 10;
+            this.trbInterval.Name = "trbInterval";
+            this.trbInterval.Size = new System.Drawing.Size(161, 45);
+            this.trbInterval.SmallChange = 5;
+            this.trbInterval.TabIndex = 11;
+            this.ttHelp.SetToolTip(this.trbInterval, "Control the drawing speed");
+            this.trbInterval.Value = 15;
+            this.trbInterval.ValueChanged += new System.EventHandler(this.TrbInterval_ValueChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1098, 768);
+            this.Controls.Add(this.trbInterval);
+            this.Controls.Add(this.lblSpeed);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblEpicycles);
             this.Controls.Add(this.btnMask);
@@ -191,7 +223,9 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainWindow_Paint);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trbInterval)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -209,6 +243,8 @@
         private System.Windows.Forms.ToolTip ttHelp;
         private System.Windows.Forms.Label lblEpicycles;
         private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label lblSpeed;
+        private System.Windows.Forms.TrackBar trbInterval;
     }
 }
 

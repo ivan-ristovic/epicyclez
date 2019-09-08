@@ -67,5 +67,12 @@ namespace Epicyclez
         private void BtnRestart_Click(object sender, EventArgs e) => this.p.Restart();
 
         private void BtnMask_Click(object sender, EventArgs e) => this.p.MaskMode = !this.p.MaskMode;
+
+        private void TrbInterval_ValueChanged(object sender, EventArgs e)
+        {
+            int value = (sender as TrackBar).Value;
+            this.tmrTick.Interval = value;
+            this.lblSpeed.Text = $"Speed     : {1000 / value}";
+        }
     }
 }
