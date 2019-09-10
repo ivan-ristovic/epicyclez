@@ -2,8 +2,8 @@
 Numerical Algorithms course project - Drawing image contours using epicycles and DFT
 
 ![Image1](paper/images/impl1.PNG)
-![Image2](paper/images/impl1.PNG)
-![Image3](paper/images/impl1.PNG)
+![Image2](paper/images/impl2.PNG)
+![Image3](paper/images/impl3.PNG)
 
 ## What are these "epicycles"?
 
