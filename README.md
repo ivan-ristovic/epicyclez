@@ -1,6 +1,8 @@
 # epicyclez
 Numerical Algorithms course project - Drawing image contours using epicycles and DFT
 
+Implemented using C# 7.3 and .NET Framework 4.7. Currently available for Windows only (until .NET Core 3.0).
+
 ## What are these "epicycles"?
 
 The simplest epicycle is made by having a circle which centre is moving around another circle. You can create more complex epicycles by stacking more and more circles around already existing ones. Epicycles were known even to the ancient Greeks and then later Ptolemy, who used them to explain the complex motions of heavenly objects in his [Ptolemaic planetary motion system](https://www.britannica.com/science/Ptolemaic-system) (this system is so complex that motions of several objects are explained using epicycles consisting of as many as 80 circles!). By stacking circles with appropriate radii and rotating them with appropriate speeds it is possible for the center of the last circle in the stack to trace any given curve, even the famous [Homer Simpson's orbit](https://www.youtube.com/watch?v=QVuU2YCwHjw)!
