@@ -1,0 +1,105 @@
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[a4paper]{article}
+
+\usepackage{color}
+\usepackage{url}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[english,serbian]{babel}
+\usepackage[unicode]{hyperref}
+\usepackage{amsmath}
+\DeclareMathOperator{\arctantwo}{arctan2}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\hypersetup{colorlinks,citecolor=green,filecolor=green,linkcolor=blue,urlcolor=blue}
+\usepackage[title]{appendix}
+\usepackage{float}
+\usepackage[graphicx]{realboxes}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+\usepackage{listings}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\lstset {
+    language=csh,
+    frame=single,
+    framesep=10pt,
+    tabsize=4,
+    xrightmargin=-25pt,
+    showstringspaces=false,
+    upquote=true,
+    commentstyle=\color{commentgreen},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    basicstyle=\small\ttfamily,
+    emphstyle={\color{blue}},
+    escapechar=\&,
+    % keyword highlighting
+    classoffset=1, % starting new class
+    morekeywords={ abstract, event, new, struct,
+    as, explicit, null, switch,
+    base, extern, object, this,
+    bool, false, operator, throw,
+    break, finally, out, true,
+    byte, fixed, override, try,
+    case, float, params, typeof,
+    catch, for, private, uint,
+    char, foreach, protected, ulong,
+    checked, goto, public, unchecked,
+    class, if, readonly, unsafe,
+    const, implicit, ref, ushort,
+    continue, in, return, using,
+    decimal, int, sbyte, virtual,
+    default, interface, sealed, volatile,
+    delegate, internal, short, void,
+    do, is, sizeof, while,
+    double, lock, stackalloc,
+    else, long, static,
+    enum, namespace, string, 
+    >,<,.,;,,,-,!,=,~},
+    keywordstyle=\color{blue},
+    classoffset=0,
+}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}[section]
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definicija}
+\newtheorem{exmp}[thm]{Primer}
+\newtheorem{assn}[thm]{Pretpostavka}
+\newtheorem{obsn}[thm]{Zapa\v{z}anje}
+\newtheorem{prob}[thm]{Problem}
+
+
+\begin{document}
+
+\title{Korišćenje Furijeovih redova za crtanje pomoću epiciklusa\\ \small{Seminarski rad u okviru kursa\\Nau\v{c}no izra\v{c}unavanje\\ Matematički fakultet}}
+
+\author{\href{mailto:ivan_ristovic@math.rs}{Ivan Ristovi\'c}}
+\date{septembar 2019.}
+
+\maketitle
+
+\input{parts/00_abstract}
+
+\tableofcontents
+
+\newpage
+
+\input{parts/10_intro}
+\input{parts/20_drawing}
+\input{parts/30_impl}
+
+\addcontentsline{toc}{section}{Literatura}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\newpage
+
+\begin{appendices}
+\input{parts/appendix}
+\end{appendices}
+
+\end{document}

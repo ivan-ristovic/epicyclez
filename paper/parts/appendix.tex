@@ -1,0 +1,55 @@
+\section{Implementacija DFT algoritma}
+\label{sec:appendix:dft}
+
+\begin{lstlisting}
+public sealed class Epicycle
+{
+    public double Frequency { get; }
+    public double Amplitude => this.value.Magnitude;
+    public double Phase => this.value.Phase;
+    private readonly Complex value;
+
+    public Epicycle(int freq, Complex c)
+    {
+        this.value = c;
+        this.Frequency = freq;
+    }
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+IReadOnlyList<Epicycle> 
+DFT(IEnumerable<float> values, int? N = null) 
+{
+    var ys = values.ToList();
+    if (N is null || N < 1)
+        N = ys.Count;
+    var dft = new List<Epicycle>(N.Value);
+
+    for (int i = 0; i < N; i++) {
+        double re = 0, im = 0;
+
+        for (int n = 0; n < ys.Count; n++) {
+            double phi = 2 * Math.PI * i * n / ys.Count;
+            re += ys[n] * Math.Cos(phi);
+            im -= ys[n] * Math.Sin(phi);
+        }
+
+        dft.Add(
+            new Epicycle(
+                i, 
+                new Complex(
+                    re / ys.Count, 
+                    im / ys.Count
+                )
+            )
+        );
+    }
+
+    return dft
+        .OrderByDescending(c => c.Amplitude)
+        .ToList()
+        .AsReadOnly()
+        ;
+}
+\end{lstlisting}

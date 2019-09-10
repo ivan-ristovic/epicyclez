@@ -1,0 +1,18 @@
+\subsection{Furijeova transformacija}
+\label{sec:Fourier}
+
+\emph{Furijeova transformacija} \cite{Fourier} razla\v{z}e funkciju u vremenskom domenu (tzv. \emph{signal}) u frekvencije od kojih je sa\v{c}injena. Tradicionalna oznaka za Furijeovu transformaciju funkcije $f$ je $\hat{f}$.
+
+Neka je funkcija $f$ periodi\v{c}na na intervalu $[a,b]$ \footnote{U definiciji neprekidne Furijeove transformacije takodje pretpostavljamo da je $f$ integrabilna sa kvadratom na intervalu $[a,b]$}. Tada se $f$ mo\v{z}e razviti u \emph{Furijeov red} \cite{NI}:
+$$f(t) = \frac{a_0}{2} \sum_{k=1}^{\infty}{a_k \cos{\frac{2\pi kt}{b-a}} + \sin{\frac{2\pi kt}{b-a}}}$$
+gde va\v{z}i:
+$$a_k = \frac{2}{b-a}\int_{a}^{b}{f(t)\cos{\frac{2\pi kt}{b-a}}dt}   , k = 0, 1, \dots$$
+$$b_k = \frac{2}{b-a}\int_{a}^{b}{f(t)\sin{\frac{2\pi kt}{b-a}}dt}   , k = 1, 2, \dots$$
+
+U praksi, signal je obi\v{c}no diskretan, pa se neprekidni Furijeov red zamenjuje diskretnom varijantom. Takodje, mogu\'c{}e je formirati kompleksnu reprezentaciju Furijeovog reda koriste\'c{}i jednakosti:
+$$e^{i\theta} = \cos{\theta} + i\sin{\theta}$$
+$$\cos{\theta} = \frac{e^{i\theta} + e^{-i\theta}}{2}$$
+$$\sin{\theta} = i\frac{e^{-i\theta} - e^{i\theta}}{2}$$
+
+Takva kompleksna reprezentacija Furijeovog reda \'c{}e biti kori\v{s}\'c{}ena kasnije u implementaciji, u narednoj formi:
+$$\hat{f}_k = \frac{1}{n}\sum_{j=0}^{n}{c_je^{2\pi ikj/n}}, k = 0, 1, \dots, n-1$$
