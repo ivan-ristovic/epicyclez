@@ -32,6 +32,7 @@
             this.tmrDraw = new System.Windows.Forms.Timer(this.components);
             this.tmrTick = new System.Windows.Forms.Timer(this.components);
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnLoadBackground = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnConfirm
@@ -67,12 +68,26 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // btnLoadBackground
+            // 
+            this.btnLoadBackground.ForeColor = System.Drawing.Color.Black;
+            this.btnLoadBackground.Location = new System.Drawing.Point(432, 12);
+            this.btnLoadBackground.Name = "btnLoadBackground";
+            this.btnLoadBackground.Size = new System.Drawing.Size(25, 25);
+            this.btnLoadBackground.TabIndex = 5;
+            this.btnLoadBackground.Text = "🖋️";
+            this.btnLoadBackground.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLoadBackground.UseVisualStyleBackColor = true;
+            this.btnLoadBackground.Click += new System.EventHandler(this.BtnLoadBackground_Click);
+            // 
             // DrawingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(469, 401);
+            this.Controls.Add(this.btnLoadBackground);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnConfirm);
             this.Cursor = System.Windows.Forms.Cursors.Cross;
@@ -94,5 +109,6 @@
         private System.Windows.Forms.Timer tmrDraw;
         private System.Windows.Forms.Timer tmrTick;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnLoadBackground;
     }
 }

@@ -63,6 +63,19 @@ namespace Epicyclez
 
         private void BtnCancel_Click(object sender, EventArgs e) => this.Close();
 
+        private void BtnLoadBackground_Click(object sender, EventArgs e)
+        {
+            var fd = new OpenFileDialog();
+            fd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            if (fd.ShowDialog() == DialogResult.OK) {
+                try {
+                    this.BackgroundImage = Image.FromFile(fd.FileName);
+                } catch (Exception) {
+                    MessageBox.Show("Error loading the specified image!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
 
         #region Mouse position helper
         [StructLayout(LayoutKind.Sequential)]
