@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Epicyclez.Common;
@@ -59,8 +56,10 @@ namespace Epicyclez
             this.p.Reset();
             using (var form = new DrawingForm()) {
                 form.ShowDialog();
-                if (form.IsConfirmed)
+                if (form.IsConfirmed) {
                     this.p.SetData(form.DrawPoints);
+                    this.trbPrecision.Value = this.trbPrecision.Maximum;
+                }
             }
         }
 
@@ -75,10 +74,9 @@ namespace Epicyclez
             this.lblSpeed.Text = $"Speed     : {1000 / value}";
         }
 
-        private void TrbPrecision_ValueChanged(object sender, EventArgs e)
+        private void TrbPrecision_ValueChanged(object sender, EventArgs e) 
         {
-            // TODO
-            throw new NotImplementedException();
+            this.p.Count = this.p.PointCount * (sender as TrackBar).Value / 100;
         }
     }
 }

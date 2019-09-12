@@ -38,11 +38,11 @@
             this.btnRestart = new System.Windows.Forms.Button();
             this.btnMask = new System.Windows.Forms.Button();
             this.ttHelp = new System.Windows.Forms.ToolTip(this.components);
-            this.lblEpicycles = new System.Windows.Forms.Label();
-            this.lblTime = new System.Windows.Forms.Label();
             this.lblSpeed = new System.Windows.Forms.Label();
             this.trbInterval = new System.Windows.Forms.TrackBar();
             this.trbPrecision = new System.Windows.Forms.TrackBar();
+            this.lblEpicycles = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.lblPrecisionTrb = new System.Windows.Forms.Label();
             this.lblSpeedTrb = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
@@ -62,9 +62,9 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.btnExit.Location = new System.Drawing.Point(1061, 1);
+            this.btnExit.Location = new System.Drawing.Point(1061, 0);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(39, 36);
+            this.btnExit.Size = new System.Drawing.Size(39, 37);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "❌";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -153,30 +153,6 @@
             this.btnMask.UseVisualStyleBackColor = true;
             this.btnMask.Click += new System.EventHandler(this.BtnMask_Click);
             // 
-            // lblEpicycles
-            // 
-            this.lblEpicycles.BackColor = System.Drawing.Color.Transparent;
-            this.lblEpicycles.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEpicycles.ForeColor = System.Drawing.Color.White;
-            this.lblEpicycles.Location = new System.Drawing.Point(9, 87);
-            this.lblEpicycles.Name = "lblEpicycles";
-            this.lblEpicycles.Size = new System.Drawing.Size(152, 23);
-            this.lblEpicycles.TabIndex = 8;
-            this.lblEpicycles.Text = "Epicycles : 0";
-            this.lblEpicycles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblTime
-            // 
-            this.lblTime.BackColor = System.Drawing.Color.Transparent;
-            this.lblTime.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.ForeColor = System.Drawing.Color.White;
-            this.lblTime.Location = new System.Drawing.Point(9, 69);
-            this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(152, 23);
-            this.lblTime.TabIndex = 9;
-            this.lblTime.Text = "Time      : 0";
-            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // lblSpeed
             // 
             this.lblSpeed.BackColor = System.Drawing.Color.Transparent;
@@ -218,6 +194,30 @@
             this.ttHelp.SetToolTip(this.trbPrecision, "Control epicycle amount");
             this.trbPrecision.Value = 100;
             this.trbPrecision.ValueChanged += new System.EventHandler(this.TrbPrecision_ValueChanged);
+            // 
+            // lblEpicycles
+            // 
+            this.lblEpicycles.BackColor = System.Drawing.Color.Transparent;
+            this.lblEpicycles.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEpicycles.ForeColor = System.Drawing.Color.White;
+            this.lblEpicycles.Location = new System.Drawing.Point(9, 87);
+            this.lblEpicycles.Name = "lblEpicycles";
+            this.lblEpicycles.Size = new System.Drawing.Size(152, 23);
+            this.lblEpicycles.TabIndex = 8;
+            this.lblEpicycles.Text = "Epicycles : 0";
+            this.lblEpicycles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTime
+            // 
+            this.lblTime.BackColor = System.Drawing.Color.Transparent;
+            this.lblTime.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.White;
+            this.lblTime.Location = new System.Drawing.Point(9, 69);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(152, 23);
+            this.lblTime.TabIndex = 9;
+            this.lblTime.Text = "Time      : 0";
+            this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblPrecisionTrb
             // 

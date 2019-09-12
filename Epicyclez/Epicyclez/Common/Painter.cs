@@ -10,10 +10,21 @@ namespace Epicyclez.Common
 {
     public sealed class Painter
     {
-        public int Count => this.csX.Count == this.csY.Count ? this.csX.Count : 0;
+        public int Count {
+            get => this.count;
+            set {
+                if (value > 0) {
+                    this.count = value;
+                    this.Resample();
+                    this.Restart();
+                }
+            }
+        }
+        public int PointCount => this.data.Count;
         public bool MaskMode { get; set; }
         public float Time { get; private set; }
 
+        private int count;
         private bool isLoaded;
         private bool isPainting;
         private IReadOnlyList<PointF> data;
@@ -24,18 +35,21 @@ namespace Epicyclez.Common
 
         public void TryLoadData(string path)
         {
+            this.Stop();
             this.data = JsonConvert.DeserializeObject<List<List<double>>>(File.ReadAllText(path))
                 .Select(p => new PointF((float)p.First(), (float)p.Last()))
                 .ToList()
                 .AsReadOnly();
             this.isLoaded = true;
-            this.Resample();
+            this.Count = this.data.Count;
         }
 
         public void SetData(IEnumerable<PointF> data)
         {
+            this.Stop();
             this.data = data.ToList().AsReadOnly();
             this.isLoaded = true;
+            this.Count = this.data.Count;
             this.Resample();
         }
 
@@ -44,15 +58,15 @@ namespace Epicyclez.Common
             if (!this.isLoaded)
                 return;
 
-            this.csX = FFT.DFT(this.data.Select(p => p.X));
-            this.csY = FFT.DFT(this.data.Select(p => p.Y));
+            this.csX = Fourier.DiscreteTransform(this.data.Select(p => p.X), this.Count);
+            this.csY = Fourier.DiscreteTransform(this.data.Select(p => p.Y), this.Count);
 
             this.Reset();
         }
 
         public void Paint(Graphics g, int w, int h)
         {
-            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
             float offx = w / 2;
             float offy = h / 2 + 100;
@@ -71,7 +85,7 @@ namespace Epicyclez.Common
             if (this.path.Count > 1) {
                 using (var p = new Pen(Color.Red, 2)) {
                     var path = new GraphicsPath();
-                    path.AddCurve(this.path.Select(t => new PointF(t.X, t.Y)).ToArray());
+                    path.AddCurve(this.path.ToArray());
                     g.DrawPath(p, path);
                 }
             }
