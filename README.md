@@ -1,4 +1,7 @@
 # epicyclez
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3676bc8ebee84f68bb121ed103cc263d)](https://app.codacy.com/manual/ivan-ristovic/epicyclez?utm_source=github.com&utm_medium=referral&utm_content=ivan-ristovic/epicyclez&utm_campaign=Badge_Grade_Dashboard)
+
 Numerical Algorithms course project - Drawing image contours using epicycles and DFT
 
 Implemented using C# 7.3 and .NET Framework 4.7. Currently available for Windows only (until .NET Core 3.0).
